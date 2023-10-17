@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active btn-lg" id="nav-coverage-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-coverage" type="button" role="tab" aria-controls="nav-coverage"
+                aria-selected="true">Rapport de
+                couverture</button>
+            <button class="nav-link btn-lg" id="nav-tracability-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-tracability" type="button" role="tab" aria-controls="nav-tracability"
+                aria-selected="false">Rapport de
+                traçabilité</button>
+            <button class="nav-link btn-lg" id="nav-testsList-tab" data-bs-toggle="tab" data-bs-target="#nav-testsList"
+                type="button" role="tab" aria-controls="nav-testsList" aria-selected="false">Liste de tests</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-coverage" role="tabpanel" aria-labelledby="nav-coverage-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="row" style="padding-top: 1vh; padding-bottom: 1vh;">
+                            <div class="col-2">
+                                <!-- Button trigger filters modal -->
+                                <button id="modal-filters-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalFilters">
+                                    Filtres
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <!-- Button trigger sorting modal -->
+                                <button id="modal-sorting-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalSorting">
+                                    Tris
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3 border bg-light">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div id="coverage-report-link" class="col list-group"
+                                        style="width: 30%; max-height:40vh; overflow-y: scroll;">
+                                        <div id="coverage-report-link-end"></div>
+                                    </div>
+                                    <div id="coverage-report-text" data-bs-spy="scroll"
+                                        data-bs-target="#coverage-report-link" data-bs-offset="0"
+                                        class="col scrollspy-coverage-report-link" tabindex="0"
+                                        style="max-height:85vh; overflow-y: scroll;">
+                                        <div id="coverage-report-text-end"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="chartdiv" style="height: 70vh; padding-top: 15vh;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-tracability" role="tabpanel" aria-labelledby="nav-tracability-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="row" style="padding-top: 1vh; padding-bottom: 1vh;">
+                            <div class="col-1">
+                                <!-- Button trigger filters modal -->
+                                <button id="modal-filters-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalFilters">
+                                    Filtres
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <!-- Button trigger sorting modal -->
+                                <button id="modal-sorting-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalSorting">
+                                    Tris
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container-fluid p-3 border bg-light" style="font-size: 40px;">
+                            <div class="row">
+                                <div class="col">
+                                    Exigences
+                                </div>
+                                <div class="col">
+                                    Tests
+                                </div>
+                                <div class="col">
+                                    Executions de test
+                                </div>
+                                <div class="col">
+                                    Défauts
+                                </div>
+                            </div>
+                            <div class="row" style="max-height:85vh; overflow-y: scroll;">
+                                <div class="col">
+                                    <ul id="tracability-report" class="list-group">
+                                        <div id="tracability-report-end"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-testsList" role="tabpanel" aria-labelledby="nav-testsList-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="row" style="padding-top: 1vh; padding-bottom: 1vh;">
+                            <div class="col-1">
+                                <!-- Button trigger filters modal -->
+                                <button id="modal-filters-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalFilters">
+                                    Filtres
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <!-- Button trigger sorting modal -->
+                                <button id="modal-sorting-btn" type="button" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                                    data-bs-target="#modalSorting">
+                                    Tris
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container-fluid p-3 border bg-light" style="font-size: 40px;">
+                            <div class="row">
+                                <div class="col">
+                                    Tests
+                                </div>
+                                <div class="col">
+                                    Executions de test
+                                </div>
+                            </div>
+                            <div class="row" style="max-height:85vh; overflow-y: scroll;">
+                                <div class="col">
+                                    <ul id="test-list-report" class="list-group">
+                                        <div id="test-list-report-end"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters Modal -->
+    <div class="modal fade" id="modalFilters" tabindex="-1" role="dialog" aria-labelledby="modalFiltersTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFiltersLongTitle">Filtres</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-lg mb-3" style="font-size: 30px;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroup-Filters-SelectStatus">Status</label>
+                                </div>
+                                <select class="custom-select" id="inputGroup-Filters-SelectStatus">
+                                    <option value="0" selected>Tous...</option>
+                                    <option value="PASSED">Passed</option>
+                                    <option value="FAILED">Failed</option>
+                                    <option value="NOTRUN">Notrun</option>
+                                    <option value="UNCOVERED">Uncovered</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-lg mb-3" style="font-size: 30px;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroup-Filters-SelectPriorite">Priorité</label>
+                                </div>
+                                <select class="custom-select" id="inputGroup-Filters-SelectPriorite">
+                                    <option value="0" selected>Toutes...</option>
+                                    <div id="inputGroup-Filters-SelectPriorite-end"></div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-lg mb-3" style="font-size: 30px;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroup-Filters-SelectTestType">Type de
+                                        test</label>
+                                </div>
+                                <select class="custom-select" id="inputGroup-Filters-SelectTestType">
+                                    <option value="0" selected>Tous...</option>
+                                    <div id="inputGroup-Filters-SelectTestType-end"></div>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-lg mb-3" style="font-size: 30px;">
+                                <div class="dropdown">
+                                    <button class="btn btn-light btn-lg btn-outline-secondary dropdown-toggle"
+                                        type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Etiquettes
+                                    </button>
+                                    <ul id="inputGroup-Filters-SelectEtiquette" class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton" style="font-size: 20px;"
+                                        onclick="event.stopPropagation()">
+                                        <div id="inputGroup-Filters-SelectEtiquette-end"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                    <button id="saveChangesFilters" type="button" class="btn btn-success btn-lg">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sorting Modal -->
+    <div class="modal fade" id="modalSorting" tabindex="-1" role="dialog" aria-labelledby="modalSortingTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSortingLongTitle">Tris</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-lg mb-3" style="font-size: 30px;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroup-Sorting-SelectStatus">Trier par</label>
+                                </div>
+                                <select class="custom-select" id="inputGroup-Sorting-Select">
+                                    <option value="Nom-down" selected>Nom <span>&#8595;</span></option>
+                                    <option value="Nom-up">Nom <span>&#8593;</span></option>
+                                    <option value="Status-down">Status <span>&#8595;</span></option>
+                                    <option value="Status-up">Status <span>&#8593;</span></option>
+                                    <option value="Type-down">Type de test <span>&#8595;</span></option>
+                                    <option value="Type-up">Type de test <span>&#8593;</span></option>
+                                    <option value="Priorite-down">Priorité <span>&#8595;</span></option>
+                                    <option value="Priorite-up">Priorité <span>&#8593;</span></option>
+                                    <option value="Date-down">Date <span>&#8595;</span></option>
+                                    <option value="Date-up">Date <span>&#8593;</span></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                    <button id="saveChangesSorting" type="button" class="btn btn-success btn-lg">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
